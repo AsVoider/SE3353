@@ -1,0 +1,44 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+spring:
+  application:
+    name: GateWay
+  cloud:
+    gateway:
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedOrigins: "http://localhost:3000"
+#            allowedHeaders: "*"
+#            allowCredentials: true
+#            allowedMethods:
+#              - GET
+#              - POST
+#              - OPTIONS
+#              - HEAD
+#              - PUT
+#              - DELETE
+#              - TRACE
+#              - CONNECT
+      routes:
+        - id: second
+          uri: http://localhost:8082
+          predicates:
+            - Path=/micro/**
+        - id: first
+          uri: http://localhost:8081
+          predicates:
+            - Path=/public/**,/admin/**,/register,/login,/logout
+
+eureka:
+  instance:
+    ip-address: localhost
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+    fetch-registry: true
+    register-with-eureka: true
+    eureka-service-url-poll-interval-seconds: 10

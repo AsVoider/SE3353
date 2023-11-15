@@ -1,0 +1,40 @@
+#spring:
+#  data:
+#    redis:
+#      cluster:
+#        nodes: 127.0.0.1:6391,127.0.0.1:6392,127.0.0.1:6393,127.0.0.1:6394,127.0.0.1:6395,127.0.0.1:6396
+#        max-redirects: 3
+#      lettuce:
+#        pool:
+#          enabled: true
+#          max-active: 8
+#          max-idle: 8
+#          min-idle: 0
+#          max-wait: -1
+
+spring:
+  application:
+    name: Book
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          max-wait: -1
+          min-idle: 0
+      timeout: 30ms
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: localhost
+  client:
+
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+server:
+  port: 8081
