@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="41d43ad3-1677-4910-9013-405769fcf2aa" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/SE3353.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HELP.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bkb.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/init.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/BkbApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Config/CacheConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Config/NewCacheCOnfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Config/Security/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Config/Security/UserAuth/AuthDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Config/Security/UserAuth/AuthDetailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Config/Security/UserAuth/AuthEntryPointJwt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Config/Security/UserAuth/AuthTokenFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Config/WebSocketConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Consumer/OrderConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Controller/BookController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Controller/CartController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Controller/OrderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/imp/BookIMP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/imp/CartIMP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/imp/OrderIMP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/imp/OrderItemIMP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/imp/UserAuthIMP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/imp/UserAvatarIMP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/imp/UserIMP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/inter/BookDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/inter/CartDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/inter/OrderDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/inter/OrderItemDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/inter/UserAuthDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DAO/inter/UserDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DTO/AuthServiceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DTO/AvatarDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DTO/BookDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DTO/OrderItemDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DTO/OrderReceiveDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DTO/OrderSendDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/DTO/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Entity/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Entity/BookStat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Entity/Cart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Entity/CartItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Entity/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Entity/OrderItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Entity/UserAuth.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Entity/UserStat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Repository/AvatarRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Repository/BookRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Repository/CartRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Repository/OrderItemRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Repository/OrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Repository/UserAuthRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Service/imply/BookImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Service/imply/CartImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Service/imply/ClockImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Service/imply/OrderImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Service/imply/UserImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Service/inter/BookServe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Service/inter/CartService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Service/inter/ClockServe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Service/inter/OrderServe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/Service/inter/UserServe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/utils/JwtUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/utils/RedisUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/books/bkb/utils/WebSocket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/books/bkb/BkbApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.books.bkb.BkbApplicationTests.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/surefire-reports/com.books.bkb.BkbApplicationTests.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/books/bkb/BkbApplicationTests.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eureka-reg/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eureka-reg/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eureka-reg/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eureka-reg/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eureka-reg/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eureka-reg/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eureka-reg/src/main/java/com/example/eurekareg/EurekaRegApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eureka-reg/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eureka-reg/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../eureka-reg/src/test/java/com/example/eurekareg/EurekaRegApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/src/main/java/com/example/gateway/CorsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/src/main/java/com/example/gateway/GatewayApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gateway/src/test/java/com/example/gateway/GatewayApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/src/main/java/com/example/micro/MicroApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/src/main/java/com/example/micro/controller/FetchAuthors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/src/main/java/com/example/micro/entity/BookEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/src/main/java/com/example/micro/repo/BookRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/src/main/java/com/example/micro/service/BookImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/src/main/java/com/example/micro/service/BookInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro/src/test/java/com/example/micro/MicroApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2YBtaSQ2fJcx3I3iXhwgcZg9eXv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/shelllock/JAVAPRO/bkb",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="41d43ad3-1677-4910-9013-405769fcf2aa" name="更改" comment="" />
+      <created>1700010863148</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700010863148</updated>
+      <workItem from="1700010864145" duration="516000" />
+      <workItem from="1700208717293" duration="19000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
