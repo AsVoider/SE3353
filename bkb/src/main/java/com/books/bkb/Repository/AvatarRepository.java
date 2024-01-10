@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AvatarRepository extends MongoRepository<UserAvatar, String> {
-    UserAvatar findUserAvatarsByUserId(Integer userid);
+    UserAvatar findByUserId(Integer userid);
     // UserAvatar updateByUsernameAndAvatar(String username, String src);
+
+    //UserAvatar updateUserAvatarByUserId(Integer userId, String src);
 }

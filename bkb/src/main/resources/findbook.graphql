@@ -1,9 +1,0 @@
-type Query {
-    bookByName(name: String) : Book
-}
-
-type Book {
-    id: ID
-    name: String
-
-}

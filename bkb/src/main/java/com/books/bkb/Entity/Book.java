@@ -96,17 +96,17 @@ public class Book {
     }
 
     // getters and setters
-    public String[] getAuthorsArray() {
-        if (authors == null) {
-            return null;
-        }
-        return authors.split(",");
-    }
-
-    public String[] getTypesArray() {
-        if (types == null) {
-            return null;
-        }
-        return types.split(",");
-    }
+//    public String[] getAuthorsArray() {
+//        if (authors == null) {
+//            return null;
+//        }
+//        return authors.split(",");
+//    }
+//
+//    public String[] getTypesArray() {
+//        if (types == null) {
+//            return null;
+//        }
+//        return types.split(",");
+//    }
 }

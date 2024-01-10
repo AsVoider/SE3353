@@ -13,12 +13,16 @@ import java.util.List;
 
 @RestController
 public class BookController {
-    @Autowired
     BookServe bookServe;
+
+    @Autowired
+    BookController(BookServe bookServe) {
+        this.bookServe = bookServe;
+    }
 
     @GetMapping("/public/Books")
     @ResponseBody
-    public String getBooks()
+    public List<Book> getBooks()
     {
         return bookServe.getBooks();
     }
@@ -81,8 +85,16 @@ public class BookController {
         System.out.println("here1");
     }
 
-    @GetMapping("c{name}")
+    @GetMapping("/public/neo/{name}")
     public ResponseEntity<?> getRelations(@PathVariable String name) {
         return ResponseEntity.ok(bookServe.findByRela(name));
     }
+
+    @GetMapping("/public/booktest/{name}")
+    @ResponseBody
+    public Book findByName(@PathVariable String name) {
+        System.out.println(name + "here");
+        return bookServe.getBookByName(name);
+    }
+
 }

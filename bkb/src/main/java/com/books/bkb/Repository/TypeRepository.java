@@ -4,6 +4,7 @@ import com.books.bkb.Entity.Book;
 import com.books.bkb.Entity.BookType;
 import io.lettuce.core.dynamic.annotation.Param;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
@@ -22,5 +23,5 @@ public interface TypeRepository extends Neo4jRepository<BookType, Long> {
     List<BookType> findNodeRelatedBookTypesDistance2(@Param("name") String name);
 
     List<BookType> findBookTypeByTypeNameLike(String name);
-    List<BookType> findAll();
+    @NotNull List<BookType> findAll();
 }

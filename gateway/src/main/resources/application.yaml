@@ -6,6 +6,9 @@ spring:
   application:
     name: GateWay
   cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
     gateway:
 #      globalcors:
 #        cors-configurations:
@@ -30,7 +33,7 @@ spring:
         - id: first
           uri: http://localhost:8081
           predicates:
-            - Path=/public/**,/admin/**,/register,/login,/logout
+            - Path=/public/**,/admin/**,/register,/login,/logout,/graphql,/neo4j
 
 eureka:
   instance:

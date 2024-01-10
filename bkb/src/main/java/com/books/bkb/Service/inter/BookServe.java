@@ -7,14 +7,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface BookServe {
-    String getBooks();
+    List<Book> getBooks();
+    Book getBookByName(String name);
     List<Book> getBooksContains(String string);
     Book GetBookById(Integer id);
-    void addBook(Book book);
-    void delBook(Integer id);
-    void updateBook(Book book);
     List<BookDTO> getAllSales(LocalDate str, LocalDate end);
     List<BookDTO> getUserSales(Integer id, LocalDate str, LocalDate end);
     List<Book> findByRela(String type);
     void test();
+    void addBook(Book book);
+    void delBook(Integer id);
+    void updateBook(Book book);
+
 }

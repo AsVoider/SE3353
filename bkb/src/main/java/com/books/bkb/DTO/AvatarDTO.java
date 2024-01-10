@@ -5,6 +5,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 public class AvatarDTO {
-    public String username;
-    public MultipartFile file;
+    String src;
 }

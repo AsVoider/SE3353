@@ -9,11 +9,14 @@ import com.books.bkb.Service.inter.ClockServe;
 import com.books.bkb.Service.inter.UserServe;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 import java.time.LocalDateTime;;
@@ -23,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@Scope("session")
+@Scope(WebApplicationContext.SCOPE_SESSION)
 public class UserController {
     @Autowired
     UserServe userServe;
@@ -83,30 +86,21 @@ public class UserController {
     }
 
     @GetMapping("/public/onLogin")
-    public void startClock() {
+    public void startClock(HttpServletRequest request) {
+        HttpSession session = request.getSession(); String sessionId = session.getId();
+        System.out.println("Session: " + sessionId);
         clockServe.OnLogin();
     }
 
     @GetMapping("/public/onLogout")
-    public ResponseEntity<?> endClock() throws JsonProcessingException {
+    public ResponseEntity<?> endClock(HttpServletRequest request) throws JsonProcessingException {
+        HttpSession session = request.getSession(); String sessionId = session.getId();
+        System.out.println("Session: " + sessionId);
         String time = clockServe.OnLogout();
         Map<String, String> map = new HashMap<>();
         map.put("session time: ", time);
         return ResponseEntity.ok(new ObjectMapper().writeValueAsString(map));
     }
-
-//    @PostMapping("/public/uploadAva")
-//    public ResponseEntity<?> upload(@RequestBody AvatarDTO avatarDto) throws IOException {
-//        byte[] bytes = avatarDto.getFile().getBytes();
-//        String base64Data = Base64.getEncoder().encodeToString(bytes);
-//        UserAvatar userAvatar = new UserAvatar();
-//        userAvatar.setAvatar(base64Data);
-//        userAvatar.setUsername(avatarDto.getUsername());
-//        if (userServe.save(userAvatar) != null) {
-//            return ResponseEntity.ok("success");
-//        }
-//        return ResponseEntity.badRequest().body("Error");
-//    }
 
     @GetMapping("/public/getAvatar/{id}")
     public ResponseEntity<?> getAvatar(@PathVariable Integer id) throws JsonProcessingException {
@@ -120,13 +114,18 @@ public class UserController {
         return ResponseEntity.ok(new ObjectMapper().writeValueAsString(map));
     }
 
-//    @PostMapping("/public/updateAvatar")
-//    public ResponseEntity<?> updateAvatar(@RequestBody AvatarDTO avatarDto) throws IOException {
-//        byte[] bytes = avatarDto.getFile().getBytes();
-//        String new64 = Base64.getEncoder().encodeToString(bytes);
-//        if (userServe.update(avatarDto.getUsername(), new64) != null) {
-//            return ResponseEntity.ok("success");
-//        }
-//        return ResponseEntity.badRequest().body("Error");
-//    }
+    @PostMapping("/public/updateAvatar")
+    public ResponseEntity<?> updateAvatar(@RequestParam Integer id, @RequestBody AvatarDTO avatarDTO) throws IOException {
+        var ava = userServe.find(id);
+        if (ava == null) {
+            var new_ava = new UserAvatar();
+            new_ava.setUserId(id);
+            new_ava.setAvatar(avatarDTO.getSrc());
+            userServe.save(new_ava);
+        } else {
+            ava.setAvatar(avatarDTO.getSrc());
+            userServe.save(ava);
+        }
+        return ResponseEntity.ok("OK");
+    }
 }

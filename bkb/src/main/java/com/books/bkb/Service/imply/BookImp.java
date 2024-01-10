@@ -31,33 +31,33 @@ public class BookImp implements BookServe {
     }
 
     @Override
-    public String getBooks()
+    public List<Book> getBooks()
     {
-        List<Book> books = bookDAO.findAll();
-        List<Map<String, Object>> bookList = new ArrayList<>();
-        for (Book book : books) {
-            Map<String, Object> bookMap = new HashMap<>();
-            bookMap.put("id", book.getId());
-            bookMap.put("title", book.getTitle());
-            bookMap.put("isbn", book.getIsbn());
-            bookMap.put("authors", Arrays.asList(book.getAuthors().split(",")));
-            bookMap.put("types", Arrays.asList(book.getTypes().split(",")));
-            bookMap.put("price", book.getPrice());
-            bookMap.put("publishTime", book.getPublishTime());
-            System.out.println(book.getPublishTime());
-            bookMap.put("description", book.getDescription());
-            bookMap.put("isExist", book.getIsExist());
-            bookMap.put("brief", book.getBrief());
-            bookMap.put("src", book.getSrc());
-            bookList.add(bookMap);
-        }
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            return objectMapper.writeValueAsString(bookList);
-        } catch (JsonProcessingException e) {
-            e.fillInStackTrace();
-            return "";
-        }
+        return bookDAO.findAll();
+//        List<Map<String, Object>> bookList = new ArrayList<>();
+//        for (Book book : books) {
+//            Map<String, Object> bookMap = new HashMap<>();
+//            bookMap.put("id", book.getId());
+//            bookMap.put("title", book.getTitle());
+//            bookMap.put("isbn", book.getIsbn());
+//            bookMap.put("authors", Arrays.asList(book.getAuthors().split(",")));
+//            bookMap.put("types", Arrays.asList(book.getTypes().split(",")));
+//            bookMap.put("price", book.getPrice());
+//            bookMap.put("publishTime", book.getPublishTime());
+//            System.out.println(book.getPublishTime());
+//            bookMap.put("description", book.getDescription());
+//            bookMap.put("isExist", book.getIsExist());
+//            bookMap.put("brief", book.getBrief());
+//            bookMap.put("src", book.getSrc());
+//            bookList.add(bookMap);
+//        }
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        try {
+//            return objectMapper.writeValueAsString(bookList);
+//        } catch (JsonProcessingException e) {
+//            e.fillInStackTrace();
+//            return "";
+//        }
     }
     @Override
     public List<Book> getBooksContains(String string)
@@ -165,5 +165,10 @@ public class BookImp implements BookServe {
     @Override
     public void test() {
         bookDAO.test();
+    }
+
+    @Override
+    public Book getBookByName(String name) {
+        return bookDAO.findByName(name);
     }
 }

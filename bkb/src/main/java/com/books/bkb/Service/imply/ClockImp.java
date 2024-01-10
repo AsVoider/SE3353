@@ -3,17 +3,19 @@ package com.books.bkb.Service.imply;
 import com.books.bkb.Service.inter.ClockServe;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.time.format.DateTimeFormatter;
 
 @Service
-@Scope("session")
+@Scope(WebApplicationContext.SCOPE_SESSION)
 public class ClockImp implements ClockServe {
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     long StartTime = 0;
 
     @Override
     public void OnLogin() {
+        System.out.println("login");
         if(StartTime == 0) {
             StartTime = System.currentTimeMillis();
         }

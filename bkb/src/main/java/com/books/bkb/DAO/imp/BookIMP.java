@@ -5,6 +5,7 @@ import com.books.bkb.Entity.Book;
 import com.books.bkb.Entity.BookType;
 import com.books.bkb.Repository.BookRepository;
 import com.books.bkb.Repository.TypeRepository;
+import com.books.bkb.Service.imply.BookImp;
 import com.books.bkb.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -15,13 +16,18 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class BookIMP implements BookDAO {
-    @Autowired
     BookRepository bookRepository;
-    @Autowired
     TypeRepository typeRepository;
+
+    @Autowired
+    BookIMP(BookRepository bookRepository, TypeRepository typeRepository) {
+        this.bookRepository = bookRepository;
+        this.typeRepository = typeRepository;
+    }
     @Override
     //@Cacheable(cacheNames = "OneBook", key = "'book-' + #id")
     public Book findOneBook(Integer id) {
@@ -130,28 +136,45 @@ public class BookIMP implements BookDAO {
         System.out.println("here");
 
         // 数据准备
-        bookType1.addBookID(1);
-        bookType1.addBookID(21);
-        bookType1.addBookID(22);
-
-        bookType2.addBookID(2);
-        bookType2.addBookID(18);
-        bookType2.addBookID(20);
-
-        bookType3.addBookID(3);
-        bookType3.addBookID(5);
-        bookType3.addBookID(6);
-        bookType3.addBookID(7);
-        bookType3.addBookID(8);
-        bookType3.addBookID(9);
-        bookType3.addBookID(10);
-
-        bookType4.addBookID(11);
-        bookType5.addBookID(12);
-        bookType6.addBookID(13);
-        bookType6.addBookID(17);
-        bookType7.addBookID(14);
-        bookType7.addBookID(23);
+//        bookType1.addBookID(3);
+//        bookType1.addBookID(21);
+//        bookType1.addBookID(22);
+//
+//        bookType2.addBookID(4);
+//        bookType2.addBookID(19);
+//        bookType2.addBookID(20);
+//
+//        bookType3.addBookID(5);
+//        bookType3.addBookID(7);
+//        bookType3.addBookID(8);
+//        bookType3.addBookID(9);
+//        bookType3.addBookID(10);
+//        bookType3.addBookID(11);
+//        bookType3.addBookID(12);
+//
+//        bookType4.addBookID(13);
+//        bookType5.addBookID(14);
+//        bookType6.addBookID(15);
+//        bookType6.addBookID(18);
+//        bookType7.addBookID(16);
+//        bookType7.addBookID(23);
+        var books = findAll();
+        for (var book : books) {
+            if (Objects.equals(book.getTypes(), bookType1.getTypeName()))
+                bookType1.addBookID(book.getId());
+            if (Objects.equals(book.getTypes(), bookType2.getTypeName()))
+                bookType2.addBookID(book.getId());
+            if (Objects.equals(book.getTypes(), bookType3.getTypeName()))
+                bookType3.addBookID(book.getId());
+            if (Objects.equals(book.getTypes(), bookType4.getTypeName()))
+                bookType4.addBookID(book.getId());
+            if (Objects.equals(book.getTypes(), bookType5.getTypeName()))
+                bookType5.addBookID(book.getId());
+            if (Objects.equals(book.getTypes(), bookType6.getTypeName()))
+                bookType6.addBookID(book.getId());
+            if (Objects.equals(book.getTypes(), bookType7.getTypeName()))
+                bookType7.addBookID(book.getId());
+        }
 
         bookType1.add_related(bookType2);
         bookType1.add_related(bookType3);
@@ -162,7 +185,7 @@ public class BookIMP implements BookDAO {
         bookType3.add_related(bookType5);
         bookType3.add_related(bookType6);
         bookType4.add_related(bookType5);
-        bookType4.add_related(bookType6);
+        //bookType4.add_related(bookType6);
 
         bookType5.add_related(bookType7);
         bookType6.add_related(bookType7);
@@ -176,9 +199,10 @@ public class BookIMP implements BookDAO {
         typeRepository.save(bookType5);
         typeRepository.save(bookType6);
         typeRepository.save(bookType7);
-//        var l = typeRepository.findAll();
-//        for (var ls : l) {
-//            System.out.println(ls.getTypeName());
-//        }
+    }
+
+    @Override
+    public Book findByName(String name) {
+        return  bookRepository.findByTitle(name);
     }
 }

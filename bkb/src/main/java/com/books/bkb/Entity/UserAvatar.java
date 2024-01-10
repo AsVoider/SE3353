@@ -12,9 +12,8 @@ import org.springframework.data.redis.core.index.Indexed;
 @Document(collection = "userAvatar")
 public class UserAvatar {
     @Id
-    @Field("_id")
     private String id;
-    @Field("username")
+    @Field("userId")
     @Indexed
     private Integer userId;
     @Field("avatar")

@@ -23,7 +23,8 @@ public class UserAvatarIMP implements UserAvatarDao {
 
     @Override
     public UserAvatar findByUserId(Integer userid) {
-        return avatarRepository.findUserAvatarsByUserId(userid);
+        System.out.println("start find");
+        return avatarRepository.findByUserId(userid);
     }
 
     @Override

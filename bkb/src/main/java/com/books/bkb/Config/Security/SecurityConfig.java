@@ -88,7 +88,9 @@ public class SecurityConfig {
                                 .requestMatchers("/actuator/**").permitAll()
                                 .requestMatchers("/register").permitAll()
                                 .requestMatchers("/neo4j").permitAll()
-                                .requestMatchers("/admin/**").hasRole("ROLE_ADMIN")
+                                .requestMatchers("/graphql").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/public/**").hasRole("USER")
                                 .anyRequest().authenticated()
                 );
         http.
