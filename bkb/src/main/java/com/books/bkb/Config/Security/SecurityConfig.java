@@ -2,28 +2,37 @@ package com.books.bkb.Config.Security;
 
 import com.books.bkb.Config.Security.UserAuth.AuthDetail;
 import com.books.bkb.Config.Security.UserAuth.AuthDetailService;
-import com.books.bkb.DTO.AuthServiceDTO;
+import com.books.bkb.Config.Security.UserAuth.AuthEntryPointJwt;
+import com.books.bkb.Config.Security.UserAuth.AuthTokenFilter;
+import com.books.bkb.utils.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.util.Collections;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,47 +42,90 @@ import java.util.Map;
 public class SecurityConfig {
 
     AuthDetailService authDetailService;
+    AuthEntryPointJwt authEntryPointJwt;
     ObjectMapper objectMapper;
 
     @Autowired
-    public SecurityConfig(AuthDetailService authDetailService, ObjectMapper objectMapper) {
+    public SecurityConfig(AuthDetailService authDetailService, AuthEntryPointJwt authEntryPointJwt, ObjectMapper objectMapper) {
         this.authDetailService = authDetailService;
+        this.authEntryPointJwt = authEntryPointJwt;
         this.objectMapper = objectMapper;
     }
 
+    @Bean
+    public AuthTokenFilter authtokenFilter() {
+        return new AuthTokenFilter();
+    }
     @Bean
     public PasswordEncoder passwordEncoder()
     {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(authDetailService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
+        http.cors(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable)
+                .exceptionHandling(exp -> exp.authenticationEntryPoint(authEntryPointJwt))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth ->
+                        auth.requestMatchers("/login").permitAll()
+                                .requestMatchers("/logout").permitAll()
+                                .requestMatchers("/actuator/**").permitAll()
+                                .requestMatchers("/register").permitAll()
+                                .requestMatchers("/neo4j").permitAll()
+                                .requestMatchers("/graphql").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/public/**").hasRole("USER")
+                                .anyRequest().authenticated()
+                );
         http.
-                cors().and().csrf().disable().httpBasic();
-        http.
-                formLogin(form -> form.loginPage("/login").permitAll()
+                formLogin(form -> form.loginPage("/login")
+                        .permitAll()
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .successHandler(((request, response, authentication) -> {
                             response.setStatus(HttpServletResponse.SC_OK);
                             setHeader(request, response);
                             AuthDetail user = (AuthDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                            AuthServiceDTO authServiceDTO = new AuthServiceDTO();
-                            authServiceDTO.setId(user.id());
-                            authServiceDTO.setName(user.name());
-                            authServiceDTO.setUsername(user.getUsername());
-                            authServiceDTO.setAdmin(user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")));
-                            response.getWriter().println(objectMapper.writeValueAsString(authServiceDTO));
-                            //clockServe.OnLogin();
-                            System.out.println("success");
+                            ResponseCookie responseCookie;
+                            try {
+                                responseCookie = JwtUtil.generateJwtCookie(user.getUsername(), user.id().toString(), user.getAuthorities().toString());
+                            } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+                                throw new RuntimeException(e);
+                            }
+                            setHeader(request, response);
+                            response.setHeader(HttpHeaders.SET_COOKIE, responseCookie.toString());
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            Map<String, Object> responseData = new HashMap<>();
+                            responseData.put("id", user.id());
+                            responseData.put("role", user.getAuthorities().stream().anyMatch(au -> au.getAuthority().contains("ROLE_ADMIN")) ? 1 : 0);
+                            responseData.put(responseCookie.getName(), responseCookie.getValue());
+                            responseData.put("Path", responseCookie.getPath());
+                            try{
+                                response.getWriter().write(new ObjectMapper().writeValueAsString(responseData));
+                                response.getWriter().flush();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }))
                         .failureHandler(((request, response, exception) -> {
                             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                             setHeader(request, response);
-                            System.out.println();
                             if(exception instanceof UsernameNotFoundException || exception instanceof BadCredentialsException)
                                 response.getWriter().println("Wrong Username or Password");
                             else if(exception instanceof DisabledException)
@@ -86,18 +138,13 @@ public class SecurityConfig {
                         .logoutSuccessHandler((request, response, authentication) -> {
                             setHeader(request, response);
                             response.setStatus(HttpServletResponse.SC_OK);
-                            //String time = clockServe.OnLogout();
                             Map<String, String> map = new HashMap<>();
-                            //map.put("message", time);
+                            map.put("message", "logoutSuccess");
                             response.getWriter().println(objectMapper.writeValueAsString(map));
                         }).permitAll());
-        http.
-                authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/public/**").hasRole("USER")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/**").permitAll()
-                        .anyRequest().authenticated());
-
+        http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+        http.authenticationProvider(authenticationProvider());
+        http.addFilterBefore(authtokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -111,16 +158,5 @@ public class SecurityConfig {
         //response.setHeader("Access-Control-Allow-Credentials", "true");
     }
 
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowCredentials(true);
-//        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
-//        configuration.setAllowedHeaders(Collections.singletonList("*"));
-//        configuration.setAllowedMethods(Collections.singletonList("*"));
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration(("/**"), configuration);
-//        return source;
-//    }
 }
 

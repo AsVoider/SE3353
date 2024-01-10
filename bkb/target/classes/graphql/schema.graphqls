@@ -1,0 +1,17 @@
+type Query {
+    bookByTitle(title: String) : book
+}
+
+type book {
+    id: ID
+    title: String
+    isbn: String
+    authors: String
+    types: String
+    price: Float
+    publishTime: String
+    description: String
+    isExist: Int
+    brief: String
+    src: String
+}

@@ -1,5 +1,6 @@
 package com.books.bkb.Config.Security.UserAuth;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,8 +11,8 @@ public class AuthDetail implements UserDetails {
     private final String name;
     private final String username;
     private final String password;
+    @Getter
     private final String email;
-
     private final Collection<? extends GrantedAuthority> authorities;
     private final boolean isEnabled;
 
@@ -24,10 +25,6 @@ public class AuthDetail implements UserDetails {
         this.email = email;
         this.authorities = authorities;
         this.isEnabled = isEnabled;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public Integer id()

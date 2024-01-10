@@ -1,7 +1,7 @@
 package com.books.bkb.Controller;
 
 import com.books.bkb.Entity.CartItem;
-import com.books.bkb.Service.CartService;
+import com.books.bkb.Service.inter.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

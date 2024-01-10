@@ -2,9 +2,10 @@ package com.books.bkb.Controller;
 
 import com.books.bkb.DTO.BookDTO;
 import com.books.bkb.Entity.Book;
-import com.books.bkb.Service.BookServe;
+import com.books.bkb.Service.inter.BookServe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -12,12 +13,16 @@ import java.util.List;
 
 @RestController
 public class BookController {
-    @Autowired
     BookServe bookServe;
+
+    @Autowired
+    BookController(BookServe bookServe) {
+        this.bookServe = bookServe;
+    }
 
     @GetMapping("/public/Books")
     @ResponseBody
-    public String getBooks()
+    public List<Book> getBooks()
     {
         return bookServe.getBooks();
     }
@@ -73,4 +78,23 @@ public class BookController {
             return bookServe.getUserSales(id, start.toLocalDate(), end.toLocalDate());
         }
     }
+
+    @RequestMapping("/neo4j")
+    public void testNeo4j(){
+        bookServe.test();
+        System.out.println("here1");
+    }
+
+    @GetMapping("/public/neo/{name}")
+    public ResponseEntity<?> getRelations(@PathVariable String name) {
+        return ResponseEntity.ok(bookServe.findByRela(name));
+    }
+
+    @GetMapping("/public/booktest/{name}")
+    @ResponseBody
+    public Book findByName(@PathVariable String name) {
+        System.out.println(name + "here");
+        return bookServe.getBookByName(name);
+    }
+
 }

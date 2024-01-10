@@ -25,7 +25,24 @@ spring:
           max-idle: 8
           max-wait: -1
           min-idle: 0
-      timeout: 30ms
+      timeout: 1000
+    mongodb:
+      uri: mongodb://localhost:27017/bookstore
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: 12345678
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphql
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+
 eureka:
   instance:
     prefer-ip-address: true

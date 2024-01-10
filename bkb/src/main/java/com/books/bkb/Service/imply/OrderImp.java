@@ -4,7 +4,7 @@ import com.books.bkb.DAO.inter.*;
 import com.books.bkb.DTO.OrderReceiveDTO;
 import com.books.bkb.DTO.OrderSendDTO;
 import com.books.bkb.Entity.*;
-import com.books.bkb.Service.OrderServe;
+import com.books.bkb.Service.inter.OrderServe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;

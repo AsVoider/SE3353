@@ -6,7 +6,7 @@ import com.books.bkb.DAO.inter.UserDAO;
 import com.books.bkb.Entity.Book;
 import com.books.bkb.Entity.Cart;
 import com.books.bkb.Entity.CartItem;
-import com.books.bkb.Service.CartService;
+import com.books.bkb.Service.inter.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

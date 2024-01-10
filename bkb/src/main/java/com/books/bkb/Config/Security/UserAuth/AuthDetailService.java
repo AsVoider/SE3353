@@ -22,6 +22,12 @@ public class AuthDetailService implements UserDetailsService {
     @Autowired
     UserAuthDAO userAuthDAO;
 
+    @Autowired
+    public AuthDetailService(UserDAO userDao, UserAuthDAO userAuthDao) {
+        this.userDAO = userDao;
+        this.userAuthDAO = userAuthDao;
+    }
+
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
         var auth = userAuthDAO.findByUsername(username);

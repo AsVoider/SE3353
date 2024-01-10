@@ -1,7 +1,10 @@
 package com.books.bkb.Entity;
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
 
+@Getter
 public class UserStat {
     String name;
     BigDecimal spent;
@@ -14,15 +17,4 @@ public class UserStat {
         this.num = num;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public BigDecimal getSpent() {
-        return spent;
-    }
-
-    public Integer getNum() {
-        return num;
-    }
 }

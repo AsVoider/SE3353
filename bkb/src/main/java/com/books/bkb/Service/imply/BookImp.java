@@ -5,7 +5,7 @@ import com.books.bkb.DAO.inter.OrderDAO;
 import com.books.bkb.DAO.inter.OrderItemDAO;
 import com.books.bkb.DTO.BookDTO;
 import com.books.bkb.Entity.Book;
-import com.books.bkb.Service.BookServe;
+import com.books.bkb.Service.inter.BookServe;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,33 +31,33 @@ public class BookImp implements BookServe {
     }
 
     @Override
-    public String getBooks()
+    public List<Book> getBooks()
     {
-        List<Book> books = bookDAO.findAll();
-        List<Map<String, Object>> bookList = new ArrayList<>();
-        for (Book book : books) {
-            Map<String, Object> bookMap = new HashMap<>();
-            bookMap.put("id", book.getId());
-            bookMap.put("title", book.getTitle());
-            bookMap.put("isbn", book.getIsbn());
-            bookMap.put("authors", Arrays.asList(book.getAuthors().split(",")));
-            bookMap.put("types", Arrays.asList(book.getTypes().split(",")));
-            bookMap.put("price", book.getPrice());
-            bookMap.put("publishTime", book.getPublishTime());
-            System.out.println(book.getPublishTime());
-            bookMap.put("description", book.getDescription());
-            bookMap.put("isExist", book.getIsExist());
-            bookMap.put("brief", book.getBrief());
-            bookMap.put("src", book.getSrc());
-            bookList.add(bookMap);
-        }
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            return objectMapper.writeValueAsString(bookList);
-        } catch (JsonProcessingException e) {
-            e.fillInStackTrace();
-            return "";
-        }
+        return bookDAO.findAll();
+//        List<Map<String, Object>> bookList = new ArrayList<>();
+//        for (Book book : books) {
+//            Map<String, Object> bookMap = new HashMap<>();
+//            bookMap.put("id", book.getId());
+//            bookMap.put("title", book.getTitle());
+//            bookMap.put("isbn", book.getIsbn());
+//            bookMap.put("authors", Arrays.asList(book.getAuthors().split(",")));
+//            bookMap.put("types", Arrays.asList(book.getTypes().split(",")));
+//            bookMap.put("price", book.getPrice());
+//            bookMap.put("publishTime", book.getPublishTime());
+//            System.out.println(book.getPublishTime());
+//            bookMap.put("description", book.getDescription());
+//            bookMap.put("isExist", book.getIsExist());
+//            bookMap.put("brief", book.getBrief());
+//            bookMap.put("src", book.getSrc());
+//            bookList.add(bookMap);
+//        }
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        try {
+//            return objectMapper.writeValueAsString(bookList);
+//        } catch (JsonProcessingException e) {
+//            e.fillInStackTrace();
+//            return "";
+//        }
     }
     @Override
     public List<Book> getBooksContains(String string)
@@ -155,5 +155,20 @@ public class BookImp implements BookServe {
             }
         }
         return new ArrayList<>(sales.values());
+    }
+
+    @Override
+    public List<Book> findByRela(String type) {
+        return bookDAO.findByType(type);
+    }
+
+    @Override
+    public void test() {
+        bookDAO.test();
+    }
+
+    @Override
+    public Book getBookByName(String name) {
+        return bookDAO.findByName(name);
     }
 }

@@ -1,15 +1,10 @@
 package com.books.bkb.Service.imply;
 
-import com.books.bkb.DAO.inter.CartDAO;
-import com.books.bkb.DAO.inter.OrderItemDAO;
-import com.books.bkb.DAO.inter.UserAuthDAO;
-import com.books.bkb.DAO.inter.UserDAO;
+import com.books.bkb.DAO.inter.*;
 import com.books.bkb.DTO.UserDTO;
-import com.books.bkb.Entity.Cart;
-import com.books.bkb.Entity.User;
-import com.books.bkb.Entity.UserStat;
-import com.books.bkb.Entity.UserAuth;
-import com.books.bkb.Service.UserServe;
+import com.books.bkb.Entity.*;
+import com.books.bkb.Service.inter.UserServe;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,14 +28,16 @@ public class UserImp implements UserServe {
     UserAuthDAO userAuthDAO;
     CartDAO cartDAO;
     OrderItemDAO orderItemDAO;
+    UserAvatarDao userAvatarDao;
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserImp(UserDAO userDAO, UserAuthDAO userAuthDAO, CartDAO cartDAO, OrderItemDAO orderItemDAO) {
+    public UserImp(UserDAO userDAO, UserAuthDAO userAuthDAO, CartDAO cartDAO, OrderItemDAO orderItemDAO, UserAvatarDao userAvatarDao) {
         this.userDAO = userDAO;
         this.userAuthDAO = userAuthDAO;
         this.cartDAO = cartDAO;
         this.orderItemDAO = orderItemDAO;
+        this.userAvatarDao = userAvatarDao;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
@@ -156,5 +153,25 @@ public class UserImp implements UserServe {
         }
         quickBuyers.sort(Comparator.comparing(UserStat::getSpent));
         return quickBuyers;
+    }
+
+//    @Override
+//    public UserAvatar update(String username, String src) {
+//        var a = userAvatarDao.findByUsername();
+//        if (a != null) {
+//            a.setAvatar(src);
+//            return userAvatarDao.save(a);
+//        }
+//        return null;
+//    }
+
+    @Override
+    public UserAvatar save(UserAvatar userAvatar) {
+        return userAvatarDao.save(userAvatar);
+    }
+
+    @Override
+    public UserAvatar find(Integer userid) {
+        return userAvatarDao.findByUserId(userid);
     }
 }
